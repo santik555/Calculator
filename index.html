@@ -102,6 +102,30 @@
         display.value = 'Error';
       }
     }
+
+    // allow input via keyboard
+    document.addEventListener('keydown', function (e) {
+      const key = e.key;
+      if (key >= '0' && key <= '9') {
+        appendToDisplay(key);
+        e.preventDefault();
+      } else if (['+', '-', '*', '/', '.', '(', ')'].includes(key)) {
+        appendToDisplay(key);
+        e.preventDefault();
+      } else if (key === 'x' || key === 'X') {
+        appendToDisplay('*');
+        e.preventDefault();
+      } else if (key === '=' || key === 'Enter') {
+        calculate();
+        e.preventDefault();
+      } else if (key === 'Backspace') {
+        display.value = display.value.slice(0, -1);
+        e.preventDefault();
+      } else if (key === 'Escape') {
+        clearDisplay();
+        e.preventDefault();
+      }
+    });
   </script>
 </body>
 </html>
